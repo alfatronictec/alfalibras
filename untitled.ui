@@ -11,16 +11,16 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>StackedWidget</string>
+   <string>Alfalibras</string>
   </property>
   <widget class="QWidget" name="page_1">
    <widget class="QLabel" name="label_signal">
     <property name="geometry">
      <rect>
       <x>28</x>
-      <y>35</y>
+      <y>25</y>
       <width>381</width>
-      <height>531</height>
+      <height>441</height>
      </rect>
     </property>
     <property name="text">
@@ -47,6 +47,9 @@
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton">
+    <property name="enabled">
+     <bool>false</bool>
+    </property>
     <property name="geometry">
      <rect>
       <x>540</x>
@@ -59,14 +62,23 @@
      <string>PushButton</string>
     </property>
    </widget>
-   <widget class="QWidget" name="widget" native="true">
+   <widget class="QLabel" name="label_return">
     <property name="geometry">
      <rect>
-      <x>460</x>
-      <y>360</y>
-      <width>251</width>
-      <height>80</height>
+      <x>70</x>
+      <y>480</y>
+      <width>291</width>
+      <height>111</height>
      </rect>
+    </property>
+    <property name="text">
+     <string>Continue Tentando</string>
+    </property>
+    <property name="scaledContents">
+     <bool>false</bool>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
     </property>
    </widget>
   </widget>

@@ -1,5 +1,7 @@
 import sys
 import cv2
+import joblib
+import numpy as np
 import mediapipe as mp
 
 from PySide6.QtCore import QTimer, Qt
@@ -54,15 +56,35 @@ class DetectorMaos:
 
         return imagem
 
+    def encontrar_pontos(self, imagem, mao_num=0, desenho=False):
+        lista_pontos = []
+
+        if self.resultado and self.resultado.multi_hand_landmarks:
+            minha_mao = self.resultado.multi_hand_landmarks[mao_num]
+            h, w, _ = imagem.shape
+
+            for id_ponto, landmark in enumerate(minha_mao.landmark):
+                cx, cy = int(landmark.x * w), int(landmark.y * h)
+                lista_pontos.append([id_ponto, cx, cy])
+
+                if desenho:
+                    cv2.circle(imagem, (cx, cy), 6, (255, 0, 0), cv2.FILLED)
+
+        return lista_pontos
+
 
 class MainWindow(QStackedWidget):
+    LIMIAR_CONFIANCA = 0.80
+
     def __init__(self):
         super().__init__()
 
         self.ui = Ui_StackedWidget()
         self.ui.setupUi(self)
 
-        self.detector = DetectorMaos()
+        self.detector = DetectorMaos(max_maos=1)
+        self.modelo = joblib.load('modelo_libras.pkl')
+
         self.cap = None
         self.timer = QTimer()
 
@@ -70,7 +92,7 @@ class MainWindow(QStackedWidget):
         self.init_camera()
 
     def load_reference_image(self):
-        pixmap = QPixmap("imagens/sinal_A.jpeg")
+        pixmap = QPixmap('imagens/letra_A.png')
 
         if not pixmap.isNull():
             self.ui.label_signal.setPixmap(
@@ -83,9 +105,32 @@ class MainWindow(QStackedWidget):
 
     def init_camera(self):
         self.cap = cv2.VideoCapture(0)
-
         self.timer.timeout.connect(self.update_frame)
         self.timer.start(30)
+
+    def reconhecer_sinal(self, frame):
+        pontos = self.detector.encontrar_pontos(frame, desenho=False)
+
+        if len(pontos) != 21:
+            return None, None
+
+        base_x = pontos[0][1]
+        base_y = pontos[0][2]
+
+        entrada = []
+        for _, x, y in pontos:
+            entrada.append(x - base_x)
+            entrada.append(y - base_y)
+
+        entrada = np.array(entrada).reshape(1, -1)
+
+        probabilidades = self.modelo.predict_proba(entrada)[0]
+        indice = np.argmax(probabilidades)
+
+        previsao = self.modelo.classes_[indice]
+        confianca = probabilidades[indice]
+
+        return previsao, confianca
 
     def update_frame(self):
         if not self.cap or not self.cap.isOpened():
@@ -98,8 +143,69 @@ class MainWindow(QStackedWidget):
         frame = cv2.flip(frame, 1)
         frame = self.detector.encontrar_maos(frame)
 
-        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        previsao, confianca = self.reconhecer_sinal(frame)
 
+        if previsao is not None:
+            if confianca >= self.LIMIAR_CONFIANCA:
+                texto = f'Sinal: {previsao} ({confianca * 100:.1f}%)'
+                cor = (0, 255, 0)
+
+                if previsao == "A":
+
+                    self.ui.label_return.setText("Acerto")
+                    self.ui.label_return.setStyleSheet("""
+                        QLabel {
+                            background-color: #28a745;
+                            color: white;
+                            font-size: 24px;
+                            font-weight: bold;
+                            border-radius: 10px;
+                        }
+                    """)
+
+                if hasattr(self.ui, 'label_resultado'):
+                    self.ui.label_resultado.setText(texto)
+            else:
+                texto = f'Incerto ({confianca * 100:.1f}%)'
+                cor = (0, 0, 255)
+
+                if hasattr(self.ui, 'label_resultado'):
+                    self.ui.label_resultado.setText(texto)
+                
+                self.ui.label_return.setText("Continue tentando")
+                self.ui.label_return.setStyleSheet("""
+                QLabel {
+                        background-color: #dc3545;
+                        color: white;
+                        font-size: 24px;
+                        font-weight: bold;
+                        border-radius: 10px;
+                    }
+                """)
+
+            cv2.putText(
+                frame,
+                texto,
+                (10, 40),
+                cv2.FONT_HERSHEY_SIMPLEX,
+                1,
+                cor,
+                3
+            )
+
+        else:
+            self.ui.label_return.setText("Continue tentando")
+            self.ui.label_return.setStyleSheet("""
+            QLabel {
+                background-color: #dc3545;
+                color: white;
+                font-size: 24px;
+                font-weight: bold;
+                border-radius: 10px;
+                }
+            """)
+            
+        frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         h, w, ch = frame_rgb.shape
         bytes_per_line = ch * w
 
@@ -112,7 +218,6 @@ class MainWindow(QStackedWidget):
         )
 
         pixmap = QPixmap.fromImage(qt_image)
-
         self.ui.label_cam.setPixmap(
             pixmap.scaled(
                 self.ui.label_cam.size(),
@@ -127,10 +232,8 @@ class MainWindow(QStackedWidget):
         event.accept()
 
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app = QApplication(sys.argv)
-
     window = MainWindow()
     window.show()
-
     sys.exit(app.exec())
