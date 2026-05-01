@@ -82,22 +82,37 @@ class MainWindow(QStackedWidget):
         self.ui = Ui_StackedWidget()
         self.ui.setupUi(self)
 
+        self.configurar_navegacao()
+        
         self.detector = DetectorMaos(max_maos=1)
         self.modelo = joblib.load('modelo_libras.pkl')
 
         self.cap = None
         self.timer = QTimer()
 
-        self.load_reference_image()
+        self.load_reference_image_letra()
+        self.load_reference_image_sinal()
         self.init_camera()
 
-    def load_reference_image(self):
+    def load_reference_image_letra(self):
         pixmap = QPixmap('imagens/letra_A.png')
 
         if not pixmap.isNull():
             self.ui.label_signal.setPixmap(
                 pixmap.scaled(
                     self.ui.label_signal.size(),
+                    Qt.KeepAspectRatio,
+                    Qt.SmoothTransformation
+                )
+            )
+
+    def load_reference_image_sinal(self):
+        pixmap = QPixmap('imagens/sinal_letra_A.png')
+
+        if not pixmap.isNull():
+            self.ui.label_signal_2.setPixmap(
+                pixmap.scaled(
+                    self.ui.label_signal_2.size(),
                     Qt.KeepAspectRatio,
                     Qt.SmoothTransformation
                 )
@@ -132,6 +147,15 @@ class MainWindow(QStackedWidget):
 
         return previsao, confianca
 
+    def configurar_navegacao(self):
+        self.ui.pushButton_Aprender.clicked.connect(
+            lambda: self.setCurrentWidget(self.ui.page_2)
+        )
+
+        self.ui.pushButton_Testar.clicked.connect(
+            lambda: self.setCurrentWidget(self.ui.page_1)
+        )
+
     def update_frame(self):
         if not self.cap or not self.cap.isOpened():
             return
@@ -152,7 +176,7 @@ class MainWindow(QStackedWidget):
 
                 if previsao == "A":
 
-                    self.ui.label_return.setText("Acerto")
+                    self.ui.label_return.setText("Acertou")
                     self.ui.label_return.setStyleSheet("""
                         QLabel {
                             background-color: #28a745;
