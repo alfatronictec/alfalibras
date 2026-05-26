@@ -5,11 +5,24 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 import joblib
 
 # ---------------- CARREGAR DADOS ---------------- #
-dados = pd.read_csv('dados_libras.csv')
+#dados = pd.read_csv('dados_libras.csv')
+# Poder usar NA
+dados = pd.read_csv(
+    'dados_libras.csv',
+    keep_default_na=False
+)
 
 # Separar atributos e rótulos
 X = dados.drop('label', axis=1)
 y = dados['label']
+
+print(dados.info())
+
+print("\nNaN por coluna:")
+print(dados.isna().sum())
+
+print("\nLinhas com NaN:")
+print(dados[dados.isna().any(axis=1)])
 
 # ---------------- DIVIDIR BASE ---------------- #
 # 80% treino | 20% teste

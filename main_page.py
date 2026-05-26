@@ -92,10 +92,11 @@ class MainWindow(QStackedWidget):
 
         self.load_reference_image_letra()
         self.load_reference_image_sinal()
+        self.load_reference_mao_sinal()
         self.init_camera()
 
     def load_reference_image_letra(self):
-        pixmap = QPixmap('imagens/letra_A.png')
+        pixmap = QPixmap('imagens/modelo_letra_A.jpeg')
 
         if not pixmap.isNull():
             self.ui.label_signal.setPixmap(
@@ -113,6 +114,18 @@ class MainWindow(QStackedWidget):
             self.ui.label_signal_2.setPixmap(
                 pixmap.scaled(
                     self.ui.label_signal_2.size(),
+                    Qt.KeepAspectRatio,
+                    Qt.SmoothTransformation
+                )
+            )
+
+    def load_reference_mao_sinal(self):
+        pixmap = QPixmap('imagens/mao_letra_A.jpeg')
+
+        if not pixmap.isNull():
+            self.ui.label_signal_3.setPixmap(
+                pixmap.scaled(
+                    self.ui.label_signal_3.size(),
                     Qt.KeepAspectRatio,
                     Qt.SmoothTransformation
                 )
@@ -176,7 +189,7 @@ class MainWindow(QStackedWidget):
 
                 if previsao == "A":
 
-                    self.ui.label_return.setText("Acertou")
+                    self.ui.label_return.setText("PARABÉNS, VOCÊ CONSEGUIU!")
                     self.ui.label_return.setStyleSheet("""
                         QLabel {
                             background-color: #28a745;
@@ -196,7 +209,7 @@ class MainWindow(QStackedWidget):
                 if hasattr(self.ui, 'label_resultado'):
                     self.ui.label_resultado.setText(texto)
                 
-                self.ui.label_return.setText("Continue tentando")
+                self.ui.label_return.setText("NÃO FOI DESSA VEZ, CONTINUE TENTANDO!")
                 self.ui.label_return.setStyleSheet("""
                 QLabel {
                         background-color: #dc3545;
@@ -255,9 +268,21 @@ class MainWindow(QStackedWidget):
             self.cap.release()
         event.accept()
 
+def aplicar_tema(app, cor_fundo="#ffffff", cor_texto="#000000"):
+    app.setStyle("Fusion")
+    app.setStyleSheet(f"""
+        QWidget {{
+            background-color: {cor_fundo};
+            color: {cor_texto};
+        }}
+    """)
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
+
+    aplicar_tema(app, "#6a6a6a", "#000000")  # branco
+    # aplicar_tema(app, "#1e1e1e", "#ffffff")  # dark (se quiser trocar depois)
+
     window = MainWindow()
     window.show()
     sys.exit(app.exec())

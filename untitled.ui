@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>600</height>
+    <width>1366</width>
+    <height>768</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,8 +19,8 @@
      <rect>
       <x>28</x>
       <y>85</y>
-      <width>381</width>
-      <height>381</height>
+      <width>600</width>
+      <height>500</height>
      </rect>
     </property>
     <property name="text">
@@ -33,10 +33,10 @@
    <widget class="QLabel" name="label_cam">
     <property name="geometry">
      <rect>
-      <x>430</x>
-      <y>85</y>
-      <width>351</width>
-      <height>351</height>
+      <x>700</x>
+      <y>250</y>
+      <width>500</width>
+      <height>400</height>
      </rect>
     </property>
     <property name="text">
@@ -49,10 +49,10 @@
    <widget class="QLabel" name="label_return">
     <property name="geometry">
      <rect>
-      <x>70</x>
-      <y>480</y>
-      <width>291</width>
-      <height>111</height>
+      <x>80</x>
+      <y>590</y>
+      <width>500</width>
+      <height>150</height>
      </rect>
     </property>
     <property name="text">
@@ -81,19 +81,20 @@
    <widget class="QLabel" name="label_2">
     <property name="geometry">
      <rect>
-      <x>320</x>
-      <y>40</y>
-      <width>251</width>
-      <height>41</height>
+      <x>770</x>
+      <y>150</y>
+      <width>381</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <pointsize>12</pointsize>
+      <pointsize>24</pointsize>
+      <bold>true</bold>
      </font>
     </property>
     <property name="text">
-     <string>Faça o Sinal da Letra na Imagem</string>
+     <string>FAÇA O SINAL DA LETRA</string>
     </property>
    </widget>
   </widget>
@@ -111,81 +112,56 @@
      <string>Testar</string>
     </property>
    </widget>
-   <widget class="QScrollArea" name="scrollArea">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>390</x>
       <y>70</y>
-      <width>691</width>
-      <height>711</height>
+      <width>531</width>
+      <height>51</height>
      </rect>
     </property>
-    <property name="verticalScrollBarPolicy">
-     <enum>Qt::ScrollBarPolicy::ScrollBarAlwaysOn</enum>
+    <property name="font">
+     <font>
+      <pointsize>26</pointsize>
+      <bold>true</bold>
+     </font>
     </property>
-    <property name="widgetResizable">
-     <bool>true</bool>
+    <property name="text">
+     <string>APRENDA O SINAL DA LETRA A</string>
     </property>
-    <widget class="QWidget" name="scrollAreaWidgetContents">
-     <property name="geometry">
-      <rect>
-       <x>0</x>
-       <y>0</y>
-       <width>675</width>
-       <height>707</height>
-      </rect>
-     </property>
-     <widget class="QLabel" name="label">
-      <property name="geometry">
-       <rect>
-        <x>260</x>
-        <y>10</y>
-        <width>111</width>
-        <height>31</height>
-       </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="text">
-       <string>Sinal da Letra A</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_signal_2">
-      <property name="geometry">
-       <rect>
-        <x>140</x>
-        <y>60</y>
-        <width>381</width>
-        <height>401</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Imagem do Sinal</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-     </widget>
-     <widget class="QLabel" name="label_signal_3">
-      <property name="geometry">
-       <rect>
-        <x>150</x>
-        <y>430</y>
-        <width>381</width>
-        <height>401</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Imagem do Sinal</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignmentFlag::AlignCenter</set>
-      </property>
-     </widget>
-    </widget>
+   </widget>
+   <widget class="QLabel" name="label_signal_2">
+    <property name="geometry">
+     <rect>
+      <x>700</x>
+      <y>160</y>
+      <width>600</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Imagem do Sinal</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_signal_3">
+    <property name="geometry">
+     <rect>
+      <x>50</x>
+      <y>160</y>
+      <width>600</width>
+      <height>600</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Imagem do Sinal</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignmentFlag::AlignCenter</set>
+    </property>
    </widget>
   </widget>
  </widget>
