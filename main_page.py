@@ -161,7 +161,7 @@ class MainWindow(QStackedWidget):
         return previsao, confianca
 
     def configurar_navegacao(self):
-        self.ui.pushButton_Aprender.clicked.connect(
+        self.ui.pushButton_Aprender_A.clicked.connect(
             lambda: self.setCurrentWidget(self.ui.page_2)
         )
 
@@ -189,7 +189,7 @@ class MainWindow(QStackedWidget):
 
                 if previsao == "A":
 
-                    self.ui.label_return.setText("PARABÉNS, VOCÊ CONSEGUIU!")
+                    self.ui.label_return.setText("Parabéns, Você conseguiu!")
                     self.ui.label_return.setStyleSheet("""
                         QLabel {
                             background-color: #28a745;
@@ -209,7 +209,7 @@ class MainWindow(QStackedWidget):
                 if hasattr(self.ui, 'label_resultado'):
                     self.ui.label_resultado.setText(texto)
                 
-                self.ui.label_return.setText("NÃO FOI DESSA VEZ, CONTINUE TENTANDO!")
+                self.ui.label_return.setText("Não foi dessa vez, continue tentando!")
                 self.ui.label_return.setStyleSheet("""
                 QLabel {
                         background-color: #dc3545;
@@ -231,7 +231,7 @@ class MainWindow(QStackedWidget):
             )
 
         else:
-            self.ui.label_return.setText("Continue tentando")
+            self.ui.label_return.setText("Não foi dessa vez, continue tentando!")
             self.ui.label_return.setStyleSheet("""
             QLabel {
                 background-color: #dc3545;
