@@ -7,7 +7,7 @@ import mediapipe as mp
 from PySide6.QtCore import QTimer, Qt
 from PySide6.QtGui import QImage, QPixmap
 from PySide6.QtWidgets import QApplication, QStackedWidget
-
+from PySide6.QtGui import QIcon
 from ui_pages import Ui_StackedWidget
 
 
@@ -96,7 +96,7 @@ class MainWindow(QStackedWidget):
         self.init_camera()
 
     def load_reference_image_letra(self):
-        pixmap = QPixmap('imagens/modelo_letra_A.jpeg')
+        pixmap = QPixmap('imagens/modelo_letra_A.png')
 
         if not pixmap.isNull():
             self.ui.label_signal.setPixmap(
@@ -280,8 +280,9 @@ def aplicar_tema(app, cor_fundo="#ffffff", cor_texto="#000000"):
 if __name__ == '__main__':
     app = QApplication(sys.argv)
 
+    app.setWindowIcon(QIcon("imagens/icon_alfa.png"))
+
     aplicar_tema(app, "#6a6a6a", "#000000")  # branco
-    # aplicar_tema(app, "#1e1e1e", "#ffffff")  # dark (se quiser trocar depois)
 
     window = MainWindow()
     window.show()
