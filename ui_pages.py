@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'untitledBndLqt.ui'
+## Form generated from reading UI file 'untitledSGEHKv.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.11.0
 ##
@@ -27,18 +27,9 @@ class Ui_StackedWidget(object):
         StackedWidget.setBaseSize(QSize(1280, 720))
         self.page_1 = QWidget()
         self.page_1.setObjectName(u"page_1")
-
-        # Plano de Fundo
-        self.page_1.setStyleSheet("""
-        QWidget#page_1 {
-            border-image: url(imagens/alfa.jpeg) 0 0 0 0 stretch stretch;
-        }
-        """)
-
-        self.page_1.setObjectName("page_1")
         self.label_signal = QLabel(self.page_1)
         self.label_signal.setObjectName(u"label_signal")
-        self.label_signal.setGeometry(QRect(750, 200, 300, 300))
+        self.label_signal.setGeometry(QRect(620, 150, 600, 500))
         self.label_signal.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_cam = QLabel(self.page_1)
         self.label_cam.setObjectName(u"label_cam")
@@ -55,7 +46,7 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_A.setIconSize(QSize(20, 20))
         self.label_2 = QLabel(self.page_1)
         self.label_2.setObjectName(u"label_2")
-        self.label_2.setGeometry(QRect(440, 30, 330, 50))
+        self.label_2.setGeometry(QRect(440, 50, 330, 50))
         sizePolicy = QSizePolicy(QSizePolicy.Policy.Preferred, QSizePolicy.Policy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -68,7 +59,7 @@ class Ui_StackedWidget(object):
         self.label_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_4 = QLabel(self.page_1)
         self.label_4.setObjectName(u"label_4")
-        self.label_4.setGeometry(QRect(440, 80, 330, 50))
+        self.label_4.setGeometry(QRect(440, 100, 330, 50))
         sizePolicy.setHeightForWidth(self.label_4.sizePolicy().hasHeightForWidth())
         self.label_4.setSizePolicy(sizePolicy)
         font1 = QFont()
@@ -79,14 +70,6 @@ class Ui_StackedWidget(object):
         StackedWidget.addWidget(self.page_1)
         self.page_2 = QWidget()
         self.page_2.setObjectName(u"page_2")
-
-        # Plano de Fundo 
-        self.page_2.setStyleSheet("""
-        QWidget#page_2 {
-            border-image: url(imagens/alfa.jpeg) 0 0 0 0 stretch stretch;
-        }
-        """)
-        self.page_2.setObjectName("page_2")
         font2 = QFont()
         font2.setPointSize(10)
         self.page_2.setFont(font2)
@@ -95,28 +78,147 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar.setGeometry(QRect(30, 30, 100, 100))
         self.label = QLabel(self.page_2)
         self.label.setObjectName(u"label")
-        self.label.setGeometry(QRect(430, 30, 380, 50))
+        self.label.setGeometry(QRect(430, 50, 380, 50))
         self.label.setFont(font)
         self.label.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_signal_2 = QLabel(self.page_2)
         self.label_signal_2.setObjectName(u"label_signal_2")
-        self.label_signal_2.setGeometry(QRect(650, 160, 410, 500))
+        self.label_signal_2.setGeometry(QRect(650, 160, 500, 500))
         self.label_signal_2.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_signal_3 = QLabel(self.page_2)
         self.label_signal_3.setObjectName(u"label_signal_3")
-        self.label_signal_3.setGeometry(QRect(150, 160, 450, 390))
+        self.label_signal_3.setGeometry(QRect(150, 160, 500, 500))
         self.label_signal_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.pushButton_Aprender_E = QPushButton(self.page_2)
         self.pushButton_Aprender_E.setObjectName(u"pushButton_Aprender_E")
         self.pushButton_Aprender_E.setGeometry(QRect(1140, 30, 100, 100))
         self.label_3 = QLabel(self.page_2)
         self.label_3.setObjectName(u"label_3")
-        self.label_3.setGeometry(QRect(430, 80, 380, 50))
+        self.label_3.setGeometry(QRect(430, 100, 380, 50))
         self.label_3.setFont(font1)
         self.label_3.setAlignment(Qt.AlignmentFlag.AlignCenter)
         StackedWidget.addWidget(self.page_2)
+        self.page_3 = QWidget()
+        self.page_3.setObjectName(u"page_3")
+        self.pushButton_Testar_2 = QPushButton(self.page_3)
+        self.pushButton_Testar_2.setObjectName(u"pushButton_Testar_2")
+        self.pushButton_Testar_2.setGeometry(QRect(30, 30, 100, 100))
+        self.pushButton_Testar_2.setFont(font2)
+        self.label_5 = QLabel(self.page_3)
+        self.label_5.setObjectName(u"label_5")
+        self.label_5.setGeometry(QRect(430, 50, 380, 50))
+        self.label_5.setFont(font)
+        self.label_5.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_6 = QLabel(self.page_3)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setGeometry(QRect(430, 100, 380, 50))
+        self.label_6.setFont(font1)
+        self.label_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_4 = QLabel(self.page_3)
+        self.label_signal_4.setObjectName(u"label_signal_4")
+        self.label_signal_4.setGeometry(QRect(150, 160, 500, 500))
+        self.label_signal_4.setFont(font2)
+        self.label_signal_4.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_5 = QLabel(self.page_3)
+        self.label_signal_5.setObjectName(u"label_signal_5")
+        self.label_signal_5.setGeometry(QRect(650, 160, 500, 500))
+        self.label_signal_5.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pushButton_Aprender_I = QPushButton(self.page_3)
+        self.pushButton_Aprender_I.setObjectName(u"pushButton_Aprender_I")
+        self.pushButton_Aprender_I.setGeometry(QRect(1140, 30, 100, 100))
+        StackedWidget.addWidget(self.page_3)
+        self.page_4 = QWidget()
+        self.page_4.setObjectName(u"page_4")
+        self.label_7 = QLabel(self.page_4)
+        self.label_7.setObjectName(u"label_7")
+        self.label_7.setGeometry(QRect(420, 40, 380, 50))
+        self.label_7.setFont(font)
+        self.label_7.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_8 = QLabel(self.page_4)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setGeometry(QRect(420, 90, 380, 50))
+        self.label_8.setFont(font1)
+        self.label_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pushButton_Testar_3 = QPushButton(self.page_4)
+        self.pushButton_Testar_3.setObjectName(u"pushButton_Testar_3")
+        self.pushButton_Testar_3.setGeometry(QRect(20, 20, 100, 100))
+        self.pushButton_Testar_3.setFont(font2)
+        self.pushButton_Aprender_I_2 = QPushButton(self.page_4)
+        self.pushButton_Aprender_I_2.setObjectName(u"pushButton_Aprender_I_2")
+        self.pushButton_Aprender_I_2.setGeometry(QRect(1130, 20, 100, 100))
+        self.label_signal_6 = QLabel(self.page_4)
+        self.label_signal_6.setObjectName(u"label_signal_6")
+        self.label_signal_6.setGeometry(QRect(140, 150, 500, 500))
+        self.label_signal_6.setFont(font2)
+        self.label_signal_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_7 = QLabel(self.page_4)
+        self.label_signal_7.setObjectName(u"label_signal_7")
+        self.label_signal_7.setGeometry(QRect(640, 150, 500, 500))
+        self.label_signal_7.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        StackedWidget.addWidget(self.page_4)
+        self.page_5 = QWidget()
+        self.page_5.setObjectName(u"page_5")
+        self.label_9 = QLabel(self.page_5)
+        self.label_9.setObjectName(u"label_9")
+        self.label_9.setGeometry(QRect(420, 40, 380, 50))
+        self.label_9.setFont(font)
+        self.label_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pushButton_Testar_4 = QPushButton(self.page_5)
+        self.pushButton_Testar_4.setObjectName(u"pushButton_Testar_4")
+        self.pushButton_Testar_4.setGeometry(QRect(20, 20, 100, 100))
+        self.pushButton_Testar_4.setFont(font2)
+        self.label_10 = QLabel(self.page_5)
+        self.label_10.setObjectName(u"label_10")
+        self.label_10.setGeometry(QRect(420, 90, 380, 50))
+        self.label_10.setFont(font1)
+        self.label_10.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_8 = QLabel(self.page_5)
+        self.label_signal_8.setObjectName(u"label_signal_8")
+        self.label_signal_8.setGeometry(QRect(140, 150, 500, 500))
+        self.label_signal_8.setFont(font2)
+        self.label_signal_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_9 = QLabel(self.page_5)
+        self.label_signal_9.setObjectName(u"label_signal_9")
+        self.label_signal_9.setGeometry(QRect(640, 150, 500, 500))
+        self.label_signal_9.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.pushButton_Aprender_I_3 = QPushButton(self.page_5)
+        self.pushButton_Aprender_I_3.setObjectName(u"pushButton_Aprender_I_3")
+        self.pushButton_Aprender_I_3.setGeometry(QRect(1130, 20, 100, 100))
+        StackedWidget.addWidget(self.page_5)
+        self.page_6 = QWidget()
+        self.page_6.setObjectName(u"page_6")
+        self.pushButton_Aprender_I_4 = QPushButton(self.page_6)
+        self.pushButton_Aprender_I_4.setObjectName(u"pushButton_Aprender_I_4")
+        self.pushButton_Aprender_I_4.setGeometry(QRect(1140, 20, 100, 100))
+        self.pushButton_Testar_5 = QPushButton(self.page_6)
+        self.pushButton_Testar_5.setObjectName(u"pushButton_Testar_5")
+        self.pushButton_Testar_5.setGeometry(QRect(30, 20, 100, 100))
+        self.pushButton_Testar_5.setFont(font2)
+        self.label_signal_10 = QLabel(self.page_6)
+        self.label_signal_10.setObjectName(u"label_signal_10")
+        self.label_signal_10.setGeometry(QRect(150, 150, 500, 500))
+        self.label_signal_10.setFont(font2)
+        self.label_signal_10.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_11 = QLabel(self.page_6)
+        self.label_11.setObjectName(u"label_11")
+        self.label_11.setGeometry(QRect(430, 40, 380, 50))
+        self.label_11.setFont(font)
+        self.label_11.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_12 = QLabel(self.page_6)
+        self.label_12.setObjectName(u"label_12")
+        self.label_12.setGeometry(QRect(430, 90, 380, 50))
+        self.label_12.setFont(font1)
+        self.label_12.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        self.label_signal_11 = QLabel(self.page_6)
+        self.label_signal_11.setObjectName(u"label_signal_11")
+        self.label_signal_11.setGeometry(QRect(650, 150, 500, 500))
+        self.label_signal_11.setAlignment(Qt.AlignmentFlag.AlignCenter)
+        StackedWidget.addWidget(self.page_6)
 
         self.retranslateUi(StackedWidget)
+
+        StackedWidget.setCurrentIndex(0)
+
 
         QMetaObject.connectSlotsByName(StackedWidget)
     # setupUi
@@ -126,61 +228,38 @@ class Ui_StackedWidget(object):
         self.label_signal.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
         self.label_cam.setText(QCoreApplication.translate("StackedWidget", u"Imagem Camera", None))
         self.label_return.setText(QCoreApplication.translate("StackedWidget", u"N\u00e3o foi dessa vez, continue tentando!", None))
-
-        self.pushButton_Aprender_A.setStyleSheet("""
-        QPushButton{
-            border: none;
-            background-image: url(imagens/icone_aprender.png);
-            background-repeat: no-repeat;
-            background-position: center;}
-
-            QPushButton:hover {
-                background-image: url(imagens/icon_aprender_pressed.png);
-            }
-            
-            QPushButton:pressed {
-            background-image: url(imagens/icon_aprender_pressed.png);
-        }    
-        """)
-
+        self.pushButton_Aprender_A.setText(QCoreApplication.translate("StackedWidget", u"Aprender Sinais", None))
         self.label_2.setText(QCoreApplication.translate("StackedWidget", u"Fa\u00e7a o Sinal", None))
         self.label_4.setText(QCoreApplication.translate("StackedWidget", u"Letra A", None))
-
-        self.pushButton_Testar.setStyleSheet("""
-        QPushButton{
-            border: none;
-            background-image: url(imagens/icone_cam.png);
-            background-repeat: no-repeat;
-            background-position: center;}
-            
-            QPushButton:hover {
-                background-image: url(imagens/icom_cam_pressed.png);
-            }
-                        
-            QPushButton:pressed {
-            background-image: url(imagens/icom_cam_pressed.png);
-        }    
-        """)
-
+        self.pushButton_Testar.setText(QCoreApplication.translate("StackedWidget", u"Praticar Sinais", None))
         self.label.setText(QCoreApplication.translate("StackedWidget", u"Aprenda o Sinal", None))
         self.label_signal_2.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
         self.label_signal_3.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
-
-        self.pushButton_Aprender_E.setStyleSheet("""
-        QPushButton{
-            border: none;
-            background-image: url(imagens/icon_passar.png);
-            background-repeat: no-repeat;
-            background-position: center;}
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:pressed {
-            background-image: url(imagens/icon_passar_pressed.png);
-        }    
-        """)
-
-
+        self.pushButton_Aprender_E.setText(QCoreApplication.translate("StackedWidget", u"E", None))
         self.label_3.setText(QCoreApplication.translate("StackedWidget", u"Letra A", None))
+        self.pushButton_Testar_2.setText(QCoreApplication.translate("StackedWidget", u"Praticar Sinais", None))
+        self.label_5.setText(QCoreApplication.translate("StackedWidget", u"Aprenda o Sinal", None))
+        self.label_6.setText(QCoreApplication.translate("StackedWidget", u"Letra E", None))
+        self.label_signal_4.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.label_signal_5.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.pushButton_Aprender_I.setText(QCoreApplication.translate("StackedWidget", u"I", None))
+        self.label_7.setText(QCoreApplication.translate("StackedWidget", u"Aprenda o Sinal", None))
+        self.label_8.setText(QCoreApplication.translate("StackedWidget", u"Letra I", None))
+        self.pushButton_Testar_3.setText(QCoreApplication.translate("StackedWidget", u"Praticar Sinais", None))
+        self.pushButton_Aprender_I_2.setText(QCoreApplication.translate("StackedWidget", u"O", None))
+        self.label_signal_6.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.label_signal_7.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.label_9.setText(QCoreApplication.translate("StackedWidget", u"Aprenda o Sinal", None))
+        self.pushButton_Testar_4.setText(QCoreApplication.translate("StackedWidget", u"Praticar Sinais", None))
+        self.label_10.setText(QCoreApplication.translate("StackedWidget", u"Letra O", None))
+        self.label_signal_8.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.label_signal_9.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.pushButton_Aprender_I_3.setText(QCoreApplication.translate("StackedWidget", u"U", None))
+        self.pushButton_Aprender_I_4.setText(QCoreApplication.translate("StackedWidget", u"A", None))
+        self.pushButton_Testar_5.setText(QCoreApplication.translate("StackedWidget", u"Praticar Sinais", None))
+        self.label_signal_10.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
+        self.label_11.setText(QCoreApplication.translate("StackedWidget", u"Aprenda o Sinal", None))
+        self.label_12.setText(QCoreApplication.translate("StackedWidget", u"Letra U", None))
+        self.label_signal_11.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
     # retranslateUi
 
