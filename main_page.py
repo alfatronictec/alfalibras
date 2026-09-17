@@ -297,9 +297,35 @@ class MainWindow(QStackedWidget):
         # direciona o usuário para a página de aprendizagem.
         self.ui.pushButton_Aprender_A.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_2))
 
+        # Botão "Aprender E":
+        # direciona o usuário para a página de aprendizagem.
+        self.ui.pushButton_Aprender_E.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_3))
+
+        # Botão "Aprender I":
+        # direciona o usuário para a página de aprendizagem.
+        self.ui.pushButton_Aprender_I.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_4))
+
+        # Botão "Aprender O":
+        # direciona o usuário para a página de aprendizagem.
+        self.ui.pushButton_Aprender_O.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_5))
+
+        # Botão "Aprender U":
+        # direciona o usuário para a página de aprendizagem.
+        self.ui.pushButton_Aprender_U.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_6))
+
+        # Botão "Aprender A Novamente":
+        # direciona o usuário para a página de aprendizagem.
+        self.ui.pushButton_Aprender_A_2.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_2))
+
         # Botão "Testar":
         # direciona o usuário para a página de teste.
         self.ui.pushButton_Testar.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_1))
+        self.ui.pushButton_Testar_2.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_1))
+        self.ui.pushButton_Testar_3.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_1))
+        self.ui.pushButton_Testar_4.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_1))
+        self.ui.pushButton_Testar_5.clicked.connect(lambda: self.setCurrentWidget(self.ui.page_1))
+
+
 
     # ========================================================
     # ATUALIZAÇÃO DA CÂMERA E RECONHECIMENTO
