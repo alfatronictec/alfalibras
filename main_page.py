@@ -186,12 +186,37 @@ class MainWindow(QStackedWidget):
     def load_reference_image_sinal(self):
 
         # Carrega a imagem do sinal correspondente à letra A
-        pixmap = QPixmap('imagens/sinal_letra_A.png')
+        pixmap_A = QPixmap('imagens/sinal_letra_A.png')
+        pixmap_E = QPixmap('imagens/sinal_letra_E.jpg')
+        pixmap_I = QPixmap('imagens/sinal_letra_I.png')
+        pixmap_O = QPixmap('imagens/sinal_letra_O.jpg')
+        pixmap_U = QPixmap('imagens/sinal_letra_U.png')
 
-        # Verifica se a imagem foi carregada corretamente
-        if not pixmap.isNull():
+
+        # Verifica se a imagem A foi carregada corretamente
+        if not pixmap_A.isNull():
             # Redimensiona a imagem mantendo a proporção
-            self.ui.label_signal_2.setPixmap(pixmap.scaled(self.ui.label_signal_2.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+            self.ui.label_signal_2.setPixmap(pixmap_A.scaled(self.ui.label_signal_2.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem E foi carregada corretamente
+        if not pixmap_E.isNull():
+            # Redimensiona a imagem mantendo a proporção
+            self.ui.label_signal_5.setPixmap(pixmap_E.scaled(self.ui.label_signal_5.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem I foi carregada corretamente
+        if not pixmap_I.isNull():
+            # Redimensiona a imagem mantendo a proporção
+            self.ui.label_signal_7.setPixmap(pixmap_I.scaled(self.ui.label_signal_7.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem O foi carregada corretamente
+        if not pixmap_O.isNull():
+            # Redimensiona a imagem mantendo a proporção
+            self.ui.label_signal_9.setPixmap(pixmap_O.scaled(self.ui.label_signal_9.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem U foi carregada corretamente
+        if not pixmap_U.isNull():
+            # Redimensiona a imagem mantendo a proporção
+            self.ui.label_signal_11.setPixmap(pixmap_U.scaled(self.ui.label_signal_11.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
 
     # ========================================================
     # CARREGA IMAGEM DE REFERÊNCIA DA MÃO
