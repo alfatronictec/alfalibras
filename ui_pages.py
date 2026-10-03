@@ -260,7 +260,7 @@ class Ui_StackedWidget(object):
         
         self.label_signal_6 = QLabel(self.page_4)
         self.label_signal_6.setObjectName(u"label_signal_6")
-        self.label_signal_6.setGeometry(QRect(140, 150, 500, 500))
+        self.label_signal_6.setGeometry(QRect(150, 160, 500, 500))
         self.label_signal_6.setFont(font2)
         self.label_signal_6.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_signal_7 = QLabel(self.page_4)
@@ -302,7 +302,7 @@ class Ui_StackedWidget(object):
         self.label_10.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_signal_8 = QLabel(self.page_5)
         self.label_signal_8.setObjectName(u"label_signal_8")
-        self.label_signal_8.setGeometry(QRect(140, 150, 500, 500))
+        self.label_signal_8.setGeometry(QRect(150, 160, 500, 500))
         self.label_signal_8.setFont(font2)
         self.label_signal_8.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_signal_9 = QLabel(self.page_5)
@@ -372,7 +372,7 @@ class Ui_StackedWidget(object):
 
         self.label_signal_10 = QLabel(self.page_6)
         self.label_signal_10.setObjectName(u"label_signal_10")
-        self.label_signal_10.setGeometry(QRect(150, 150, 500, 500))
+        self.label_signal_10.setGeometry(QRect(150, 160, 500, 500))
         self.label_signal_10.setFont(font2)
         self.label_signal_10.setAlignment(Qt.AlignmentFlag.AlignCenter)
         self.label_11 = QLabel(self.page_6)

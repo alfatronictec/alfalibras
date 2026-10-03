@@ -138,6 +138,13 @@ class MainWindow(QStackedWidget):
         self.ui = Ui_StackedWidget()
         self.ui.setupUi(self)
 
+        # Fixa o tamanho da janela em 1280x720 (não pode redimensionar)
+        self.setFixedSize(1280, 720)
+        
+        # Remove o botão de maximizar da barra de título
+        # (mantém apenas fechar e minimizar)
+        self.setWindowFlags(self.windowFlags() & ~Qt.WindowMaximizeButtonHint)
+
         # Configura os botões de navegação entre as páginas
         self.configurar_navegacao()
 
@@ -224,14 +231,41 @@ class MainWindow(QStackedWidget):
 
     def load_reference_mao_sinal(self):
 
-        # Carrega uma imagem mostrando o posicionamento da mão
-        pixmap = QPixmap('imagens/mao_letra_A.jpeg')
+        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
+        pixmap_MA = QPixmap('imagens/mao_letra_A.jpeg')
+        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
+        pixmap_ME = QPixmap('imagens/mao_letra_A.jpeg')
+        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
+        pixmap_MI = QPixmap('imagens/mao_letra_A.jpeg')
+        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
+        pixmap_MO = QPixmap('imagens/mao_letra_A.jpeg')
+        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
+        pixmap_MU = QPixmap('imagens/mao_letra_A.jpeg')
 
         # Verifica se a imagem foi carregada corretamente
-        if not pixmap.isNull():
-
+        if not pixmap_MA.isNull():
             # Redimensiona a imagem mantendo sua proporção
-            self.ui.label_signal_3.setPixmap(pixmap.scaled(self.ui.label_signal_3.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+            self.ui.label_signal_3.setPixmap(pixmap_MA.scaled(self.ui.label_signal_3.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem foi carregada corretamente
+        if not pixmap_ME.isNull():
+            # Redimensiona a imagem mantendo sua proporção
+            self.ui.label_signal_4.setPixmap(pixmap_ME.scaled(self.ui.label_signal_4.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem foi carregada corretamente
+        if not pixmap_MI.isNull():
+            # Redimensiona a imagem mantendo sua proporção
+            self.ui.label_signal_6.setPixmap(pixmap_MI.scaled(self.ui.label_signal_6.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem foi carregada corretamente
+        if not pixmap_MO.isNull():
+            # Redimensiona a imagem mantendo sua proporção
+            self.ui.label_signal_8.setPixmap(pixmap_MO.scaled(self.ui.label_signal_8.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+
+        # Verifica se a imagem foi carregada corretamente
+        if not pixmap_MU.isNull():
+            # Redimensiona a imagem mantendo sua proporção
+            self.ui.label_signal_10.setPixmap(pixmap_MU.scaled(self.ui.label_signal_10.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
 
     # ========================================================
     # INICIALIZA A CÂMERA
