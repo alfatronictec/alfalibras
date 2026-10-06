@@ -18,6 +18,17 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
 from PySide6.QtWidgets import (QApplication, QLabel, QPushButton, QSizePolicy,
     QStackedWidget, QWidget)
 
+import sys
+import os
+
+def resource_path(relative_path):
+    """Retorna o caminho correto para arquivos incluídos no executável."""
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+    return os.path.join(base_path, relative_path).replace("\\", "/")
+
 class Ui_StackedWidget(object):
     def setupUi(self, StackedWidget):
         if not StackedWidget.objectName():
@@ -45,19 +56,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_A.setGeometry(QRect(30, 30, 100, 100))
         self.pushButton_Aprender_A.setIconSize(QSize(80, 80))
         
-        self.pushButton_Aprender_A.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_A.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_aprender.png);
+                background-image: url({resource_path('imagens/icon_aprender.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_aprender_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_aprender_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_aprender_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_aprender_pressed.png')});
+            }}
         """)
         
         self.label_2 = QLabel(self.page_1)
@@ -93,19 +104,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar.setObjectName(u"pushButton_Testar")
         self.pushButton_Testar.setGeometry(QRect(30, 30, 100, 100))
         
-        self.pushButton_Testar.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Testar.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_cam.png);
+                background-image: url({resource_path('imagens/icon_cam.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
         """)
 
         self.label = QLabel(self.page_2)
@@ -125,19 +136,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_E.setObjectName(u"pushButton_Aprender_E")
         self.pushButton_Aprender_E.setGeometry(QRect(1140, 30, 100, 100))
 
-        self.pushButton_Aprender_E.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_E.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_passar.png);
+                background-image: url({resource_path('imagens/icon_passar.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
         """)
 
         self.label_3 = QLabel(self.page_2)
@@ -153,19 +164,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar_2.setGeometry(QRect(30, 30, 100, 100))
         self.pushButton_Testar_2.setFont(font2)
 
-        self.pushButton_Testar_2.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Testar_2.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_cam.png);
+                background-image: url({resource_path('imagens/icon_cam.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
         """)
 
         self.label_5 = QLabel(self.page_3)
@@ -191,19 +202,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_I.setObjectName(u"pushButton_Aprender_I")
         self.pushButton_Aprender_I.setGeometry(QRect(1140, 30, 100, 100))
 
-        self.pushButton_Aprender_I.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_I.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_passar.png);
+                background-image: url({resource_path('imagens/icon_passar.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
         """)
 
         StackedWidget.addWidget(self.page_3)
@@ -224,38 +235,38 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar_3.setGeometry(QRect(30, 30, 100, 100))
         self.pushButton_Testar_3.setFont(font2)
 
-        self.pushButton_Testar_3.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Testar_3.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_cam.png);
+                background-image: url({resource_path('imagens/icon_cam.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
         """)
 
         self.pushButton_Aprender_O = QPushButton(self.page_4)
         self.pushButton_Aprender_O.setObjectName(u"pushButton_Aprender_O")
         self.pushButton_Aprender_O.setGeometry(QRect(1140, 30, 100, 100))
 
-        self.pushButton_Aprender_O.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_O.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_passar.png);
+                background-image: url({resource_path('imagens/icon_passar.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
         """)
         
         self.label_signal_6 = QLabel(self.page_4)
@@ -280,19 +291,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar_4.setGeometry(QRect(30, 30, 100, 100))
         self.pushButton_Testar_4.setFont(font2)
 
-        self.pushButton_Testar_4.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Testar_4.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_cam.png);
+                background-image: url({resource_path('imagens/icon_cam.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
         """)
 
         self.label_10 = QLabel(self.page_5)
@@ -313,19 +324,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_U.setObjectName(u"pushButton_Aprender_U")
         self.pushButton_Aprender_U.setGeometry(QRect(1140, 30, 100, 100))
 
-        self.pushButton_Aprender_U.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_U.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_passar.png);
+                background-image: url({resource_path('imagens/icon_passar.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
         """)
 
         StackedWidget.addWidget(self.page_5)
@@ -335,19 +346,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Aprender_A_2.setObjectName(u"pushButton_Aprender_A_2")
         self.pushButton_Aprender_A_2.setGeometry(QRect(1140, 30, 100, 100))
 
-        self.pushButton_Aprender_A_2.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Aprender_A_2.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_passar.png);
+                background-image: url({resource_path('imagens/icon_passar.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_passar_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_passar_pressed.png')});
+            }}
         """)
         
         self.pushButton_Testar_5 = QPushButton(self.page_6)
@@ -355,19 +366,19 @@ class Ui_StackedWidget(object):
         self.pushButton_Testar_5.setGeometry(QRect(30, 30, 100, 100))
         self.pushButton_Testar_5.setFont(font2)
 
-        self.pushButton_Testar_5.setStyleSheet("""
-            QPushButton {
+        self.pushButton_Testar_5.setStyleSheet(f"""
+            QPushButton {{
                 border: none;
-                background-image: url(imagens/icon_cam.png);
+                background-image: url({resource_path('imagens/icon_cam.png')});
                 background-repeat: no-repeat;
                 background-position: center;
-            }
-            QPushButton:pressed {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
-            QPushButton:hover {
-                background-image: url(imagens/icon_cam_pressed.png);
-            }
+            }}
+            QPushButton:pressed {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
+            QPushButton:hover {{
+                background-image: url({resource_path('imagens/icon_cam_pressed.png')});
+            }}
         """)
 
         self.label_signal_10 = QLabel(self.page_6)
@@ -427,4 +438,3 @@ class Ui_StackedWidget(object):
         self.label_12.setText(QCoreApplication.translate("StackedWidget", u"Letra U", None))
         self.label_signal_11.setText(QCoreApplication.translate("StackedWidget", u"Imagem do Sinal", None))
     # retranslateUi
-

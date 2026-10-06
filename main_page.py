@@ -3,6 +3,7 @@
 # ============================================================
 
 import sys
+import os
 import cv2
 import joblib
 import numpy as np
@@ -16,6 +17,15 @@ from PySide6.QtWidgets import QApplication, QStackedWidget
 # Interface criada no Qt Designer e convertida para Python
 from ui_pages import Ui_StackedWidget
 
+
+def resource_path(relative_path):
+    """Retorna o caminho correto para arquivos incluídos no executável."""
+    if getattr(sys, 'frozen', False):
+        base_path = sys._MEIPASS
+    else:
+        base_path = os.path.dirname(os.path.abspath(__file__))
+
+    return os.path.join(base_path, relative_path)
 
 # ============================================================
 # CLASSE PARA DETECÇÃO DA MÃO
@@ -153,7 +163,7 @@ class MainWindow(QStackedWidget):
         self.detector = DetectorMaos(max_maos=1)
 
         # Carrega o modelo de Machine Learning previamente treinado
-        self.modelo = joblib.load('modelo_libras.pkl')
+        self.modelo = joblib.load(resource_path('modelo_libras.pkl'))
 
         # Inicialmente a câmera não está aberta
         self.cap = None
@@ -177,7 +187,7 @@ class MainWindow(QStackedWidget):
     def load_reference_image_letra(self):
 
         # Carrega a imagem que representa a letra A
-        pixmap = QPixmap('imagens/modelo_letra_A.png')
+        pixmap = QPixmap(resource_path('imagens/modelo_letra_A.png'))
 
         # Verifica se a imagem foi carregada corretamente
         if not pixmap.isNull():
@@ -193,12 +203,11 @@ class MainWindow(QStackedWidget):
     def load_reference_image_sinal(self):
 
         # Carrega a imagem do sinal correspondente à letra A
-        pixmap_A = QPixmap('imagens/sinal_letra_A.png')
-        pixmap_E = QPixmap('imagens/sinal_letra_E.jpg')
-        pixmap_I = QPixmap('imagens/sinal_letra_I.png')
-        pixmap_O = QPixmap('imagens/sinal_letra_O.jpg')
-        pixmap_U = QPixmap('imagens/sinal_letra_U.png')
-
+        pixmap_A = QPixmap(resource_path('imagens/sinal_letra_A.png'))
+        pixmap_E = QPixmap(resource_path('imagens/sinal_letra_E.jpg'))
+        pixmap_I = QPixmap(resource_path('imagens/sinal_letra_I.png'))
+        pixmap_O = QPixmap(resource_path('imagens/sinal_letra_O.jpg'))
+        pixmap_U = QPixmap(resource_path('imagens/sinal_letra_U.png'))
 
         # Verifica se a imagem A foi carregada corretamente
         if not pixmap_A.isNull():
@@ -232,15 +241,11 @@ class MainWindow(QStackedWidget):
     def load_reference_mao_sinal(self):
 
         # Carrega uma imagem mostrando o posicionamento da mão LETRA A
-        pixmap_MA = QPixmap('imagens/mao_letra_A.jpeg')
-        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
-        pixmap_ME = QPixmap('imagens/mao_letra_A.jpeg')
-        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
-        pixmap_MI = QPixmap('imagens/mao_letra_A.jpeg')
-        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
-        pixmap_MO = QPixmap('imagens/mao_letra_A.jpeg')
-        # Carrega uma imagem mostrando o posicionamento da mão LETRA A
-        pixmap_MU = QPixmap('imagens/mao_letra_A.jpeg')
+        pixmap_MA = QPixmap(resource_path('imagens/mao_letra_A.jpeg'))
+        pixmap_ME = QPixmap(resource_path('imagens/mao_letra_E.jpeg'))
+        pixmap_MI = QPixmap(resource_path('imagens/mao_letra_I.jpeg'))
+        pixmap_MO = QPixmap(resource_path('imagens/mao_letra_O.jpeg'))
+        pixmap_MU = QPixmap(resource_path('imagens/mao_letra_U.jpeg'))
 
         # Verifica se a imagem foi carregada corretamente
         if not pixmap_MA.isNull():
@@ -272,17 +277,43 @@ class MainWindow(QStackedWidget):
     # ========================================================
 
     def init_camera(self):
-
-        # Abre a câmera padrão do computador
-        self.cap = cv2.VideoCapture(0)
-
-        # Faz com que update_frame() seja executado
-        # sempre que o timer disparar
-        self.timer.timeout.connect(self.update_frame)
-
-        # Define o intervalo de atualização em 30 ms
-        # aproximadamente 33 frames por segundo
-        self.timer.start(30)
+        try:
+            # Tenta diferentes backends do OpenCV
+            backends = [
+                cv2.CAP_DSHOW,      # DirectShow (Windows)
+                cv2.CAP_MSMF,       # Media Foundation (Windows)
+                cv2.CAP_ANY         # Automático
+            ]
+            
+            for backend in backends:
+                print(f"Tentando abrir câmera com backend {backend}...")
+                self.cap = cv2.VideoCapture(0, backend)
+                
+                if self.cap.isOpened():
+                    print(f"Câmera aberta com sucesso usando backend {backend}!")
+                    break
+                else:
+                    self.cap.release()
+            
+            # Verifica se a câmera foi aberta com sucesso
+            if not self.cap.isOpened():
+                print("ERRO: Não foi possível abrir a câmera com nenhum backend!")
+                self.ui.label_cam.setText("Erro: Câmera não disponível")
+                return
+            
+            # Faz com que update_frame() seja executado
+            # sempre que o timer disparar
+            self.timer.timeout.connect(self.update_frame)
+            
+            # Define o intervalo de atualização em 30 ms
+            # aproximadamente 33 frames por segundo
+            self.timer.start(30)
+            
+        except Exception as e:
+            print(f"ERRO ao inicializar câmera: {e}")
+            import traceback
+            traceback.print_exc()
+            self.ui.label_cam.setText(f"Erro: {str(e)}")
 
 
     # ========================================================
@@ -390,62 +421,105 @@ class MainWindow(QStackedWidget):
     # ATUALIZAÇÃO DA CÂMERA E RECONHECIMENTO
     # ========================================================
 
+    # ========================================================
+    # ATUALIZAÇÃO DA CÂMERA E RECONHECIMENTO
+    # ========================================================
+
     def update_frame(self):
+        try:
+            # Verifica se a câmera está disponível e aberta
+            if not self.cap or not self.cap.isOpened():
+                print("Câmera não está aberta")
+                return
+            
+            # Captura um frame da câmera
+            ret, frame = self.cap.read()
+            
+            # Caso o frame não tenha sido capturado,
+            # encerra esta atualização.
+            if not ret:
+                print("Falha ao capturar frame")
+                return
 
-        # Verifica se a câmera está disponível e aberta
-        if not self.cap or not self.cap.isOpened():
-            return
-        
-        # Captura um frame da câmera
-        ret, frame = self.cap.read()
+            # Inverte horizontalmente a imagem.
+            # Isso cria um efeito semelhante a um espelho,
+            # facilitando a interação do usuário.
+            frame = cv2.flip(frame,1)
 
-        # Caso o frame não tenha sido capturado,
-        # encerra esta atualização.
-        if not ret:
-            return
+            # Detecta a mão e desenha os landmarks na imagem
+            frame = self.detector.encontrar_maos(frame)
 
-        # Inverte horizontalmente a imagem.
-        # Isso cria um efeito semelhante a um espelho,
-        # facilitando a interação do usuário.
-        frame = cv2.flip(frame,1)
+            # Tenta reconhecer o sinal apresentado pelo usuário
+            previsao, confianca = self.reconhecer_sinal(frame)
 
-        # Detecta a mão e desenha os landmarks na imagem
-        frame = self.detector.encontrar_maos(frame)
+            # ====================================================
+            # CASO UMA PREVISÃO TENHA SIDO OBTIDA
+            # ====================================================
 
-        # Tenta reconhecer o sinal apresentado pelo usuário
-        previsao, confianca = self.reconhecer_sinal(frame)
+            if previsao is not None:
 
-        # ====================================================
-        # CASO UMA PREVISÃO TENHA SIDO OBTIDA
-        # ====================================================
+                # Verifica se a confiança da previsão
+                # é maior ou igual ao limite definido.
+                if confianca >= self.LIMIAR_CONFIANCA:
 
-        if previsao is not None:
+                    # Texto exibido na interface e na câmera
+                    texto = (f'Sinal: {previsao} 'f'({confianca * 100:.1f}%)')
 
-            # Verifica se a confiança da previsão
-            # é maior ou igual ao limite definido.
-            if confianca >= self.LIMIAR_CONFIANCA:
+                    # Verde indica uma previsão aceita
+                    cor = (0, 255, 0)
 
-                # Texto exibido na interface e na câmera
-                texto = (f'Sinal: {previsao} 'f'({confianca * 100:.1f}%)')
+                    # ============================================
+                    # VERIFICAÇÃO DA RESPOSTA DO USUÁRIO
+                    # ============================================
 
-                # Verde indica uma previsão aceita
-                cor = (0, 255, 0)
+                    # Neste momento o exercício está configurado
+                    # para verificar especificamente a letra A.
+                    if previsao == "A":
 
-                # ============================================
-                # VERIFICAÇÃO DA RESPOSTA DO USUÁRIO
-                # ============================================
+                        # Mensagem de sucesso
+                        self.ui.label_return.setText("Parabéns, Você conseguiu!")
 
-                # Neste momento o exercício está configurado
-                # para verificar especificamente a letra A.
-                if previsao == "A":
+                        # Estilo visual da mensagem de sucesso
+                        self.ui.label_return.setStyleSheet("""
+                            QLabel {
+                                background-color: #28a745;
+                                color: white;
+                                font-size: 24px;
+                                font-weight: bold;
+                                border-radius: 10px;
+                            }
+                        """)
 
-                    # Mensagem de sucesso
-                    self.ui.label_return.setText("Parabéns, Você conseguiu!")
 
-                    # Estilo visual da mensagem de sucesso
+                    # Atualiza o resultado na interface,
+                    # caso o QLabel exista.
+                    if hasattr(self.ui,'label_resultado'):
+                        self.ui.label_resultado.setText(texto)
+
+                # =================================================
+                # PREVISÃO ABAIXO DO LIMIAR
+                # =================================================
+
+                else:
+
+                    # Informa que o modelo não possui confiança
+                    # suficiente para aceitar a previsão.
+                    texto = (f'Incerto ' f'({confianca * 100:.1f}%)')
+
+                    # Vermelho indica baixa confiança
+                    cor = (0, 0, 255)
+
+                    # Atualiza o resultado na interface
+                    if hasattr(self.ui,'label_resultado'):
+                        self.ui.label_resultado.setText(texto)
+
+                    # Mensagem de tentativa novamente
+                    self.ui.label_return.setText("Não foi dessa vez, continue tentando!")
+
+                    # Estilo visual da mensagem de erro
                     self.ui.label_return.setStyleSheet("""
-                        QLabel {
-                            background-color: #28a745;
+                    QLabel {
+                            background-color: #dc3545;
                             color: white;
                             font-size: 24px;
                             font-weight: bold;
@@ -453,93 +527,60 @@ class MainWindow(QStackedWidget):
                         }
                     """)
 
+                # =================================================
+                # ESCREVE O RESULTADO SOBRE O VÍDEO
+                # =================================================
 
-                # Atualiza o resultado na interface,
-                # caso o QLabel exista.
-                if hasattr(self.ui,'label_resultado'):
-                    self.ui.label_resultado.setText(texto)
+                cv2.putText(frame,texto,(10, 40),cv2.FONT_HERSHEY_SIMPLEX,1,cor,3)
 
-            # =================================================
-            # PREVISÃO ABAIXO DO LIMIAR
-            # =================================================
+            # ====================================================
+            # NENHUMA MÃO DETECTADA
+            # ====================================================
 
             else:
 
-                # Informa que o modelo não possui confiança
-                # suficiente para aceitar a previsão.
-                texto = (f'Incerto ' f'({confianca * 100:.1f}%)')
-
-                # Vermelho indica baixa confiança
-                cor = (0, 0, 255)
-
-                # Atualiza o resultado na interface
-                if hasattr(self.ui,'label_resultado'):
-                    self.ui.label_resultado.setText(texto)
-
-                # Mensagem de tentativa novamente
+                # Exibe mensagem informando que o usuário
+                # deve continuar tentando.
                 self.ui.label_return.setText("Não foi dessa vez, continue tentando!")
 
-                # Estilo visual da mensagem de erro
+                # Estilo visual da mensagem
                 self.ui.label_return.setStyleSheet("""
                 QLabel {
-                        background-color: #dc3545;
-                        color: white;
-                        font-size: 24px;
-                        font-weight: bold;
-                        border-radius: 10px;
+                    background-color: #dc3545;
+                    color: white;
+                    font-size: 24px;
+                    font-weight: bold;
+                    border-radius: 10px;
                     }
                 """)
 
-            # =================================================
-            # ESCREVE O RESULTADO SOBRE O VÍDEO
-            # =================================================
 
-            cv2.putText(frame,texto,(10, 40),cv2.FONT_HERSHEY_SIMPLEX,1,cor,3)
+            # ====================================================
+            # CONVERSÃO PARA EXIBIÇÃO NO QT
+            # ====================================================
+            # OpenCV trabalha originalmente com BGR.
+            # O QImage utiliza RGB.
+            frame_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
 
-        # ====================================================
-        # NENHUMA MÃO DETECTADA
-        # ====================================================
+            # Obtém as dimensões do frame
+            h, w, ch = frame_rgb.shape
 
-        else:
+            # Calcula o número de bytes de cada linha da imagem
+            bytes_per_line = ch * w
 
-            # Exibe mensagem informando que o usuário
-            # deve continuar tentando.
-            self.ui.label_return.setText("Não foi dessa vez, continue tentando!")
+            # Cria uma imagem compatível com o Qt
+            qt_image = QImage(frame_rgb.data,w,h,bytes_per_line,QImage.Format_RGB888)
 
-            # Estilo visual da mensagem
-            self.ui.label_return.setStyleSheet("""
-            QLabel {
-                background-color: #dc3545;
-                color: white;
-                font-size: 24px;
-                font-weight: bold;
-                border-radius: 10px;
-                }
-            """)
+            # Converte QImage para QPixmap
+            pixmap = QPixmap.fromImage(qt_image)
 
-
-        # ====================================================
-        # CONVERSÃO PARA EXIBIÇÃO NO QT
-        # ====================================================
-        # OpenCV trabalha originalmente com BGR.
-        # O QImage utiliza RGB.
-        frame_rgb = cv2.cvtColor(frame,cv2.COLOR_BGR2RGB)
-
-        # Obtém as dimensões do frame
-        h, w, ch = frame_rgb.shape
-
-        # Calcula o número de bytes de cada linha da imagem
-        bytes_per_line = ch * w
-
-        # Cria uma imagem compatível com o Qt
-        qt_image = QImage(frame_rgb.data,w,h,bytes_per_line,QImage.Format_RGB888)
-
-        # Converte QImage para QPixmap
-        pixmap = QPixmap.fromImage(qt_image)
-
-        # Exibe o frame no QLabel da interface
-        self.ui.label_cam.setPixmap(pixmap.scaled(self.ui.label_cam.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
-
+            # Exibe o frame no QLabel da interface
+            self.ui.label_cam.setPixmap(pixmap.scaled(self.ui.label_cam.size(),Qt.KeepAspectRatio,Qt.SmoothTransformation))
+        
+        except Exception as e:
+            print(f"ERRO no update_frame: {e}")
+            import traceback
+            traceback.print_exc()
     # ========================================================
     # ENCERRAMENTO DA APLICAÇÃO
     # ========================================================
@@ -584,7 +625,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
 
     # Define o ícone da aplicação
-    app.setWindowIcon(QIcon("imagens/icon_alfa.png"))
+    app.setWindowIcon(QIcon(resource_path("imagens/icon_alfa.png")))
 
     # Aplica o tema da aplicação
     aplicar_tema(app, "#6a6a6a", "#000000")
